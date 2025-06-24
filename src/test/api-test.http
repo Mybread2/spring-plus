@@ -50,7 +50,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJhZG1pb
 ### 할일 생성 (토큰 필요)
 POST http://localhost:8080/todos
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzI4NjMxLCJpYXQiOjE3NTA3MjUwMzF9.giQbB5fR9cwhfYH2SjkCxJSBI4aazYG7ERwhDKrwGaM
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzMzMzE1LCJpYXQiOjE3NTA3Mjk3MTV9.Bvz02s1M5PV48anNoU76XB19Wz9uiFVFBiHkjcbw2Tk
 
 {
   "title": "테스트 할일",
