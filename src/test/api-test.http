@@ -1,4 +1,4 @@
-### 회원가입
+### 회원가입 (일반 USER 계정)
 POST http://localhost:8080/auth/signup
 Content-Type: application/json
 
@@ -9,13 +9,42 @@ Content-Type: application/json
   "userRole": "USER"
 }
 
-### 로그인
+### 회원가입 (ADMIN 계정)
+POST http://localhost:8080/auth/signup
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "email": "admin@example.com",
+  "password": "Admin123!",
+  "userRole": "ADMIN"
+}
+
+### 로그인 (USER)
 POST http://localhost:8080/auth/signin
 Content-Type: application/json
 
 {
   "email": "test@example.com",
   "password": "Test123!"
+}
+
+### 로그인 (ADMIN)
+POST http://localhost:8080/auth/signin
+Content-Type: application/json
+
+{
+  "email": "admin@example.com",
+  "password": "Admin123!"
+}
+
+### ADMIN이 유저 권한 변경
+PATCH http://localhost:8080/admin/users/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJ1c2VyUm9sZSI6IkFETUlOIiwiZXhwIjoxNzUwNzMwNDQ2LCJpYXQiOjE3NTA3MjY4NDZ9.aJnnL9mao9pwMrxpWfONlBf3SeNjbP6-jvmKOwNTuEY
+
+{
+  "role": "ADMIN"
 }
 
 ### 할일 생성 (토큰 필요)
@@ -49,9 +78,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0I
 GET http://localhost:8080/todos/2
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzI4NjMxLCJpYXQiOjE3NTA3MjUwMzF9.giQbB5fR9cwhfYH2SjkCxJSBI4aazYG7ERwhDKrwGaM
 
+
+
 ### 유저 조회 (토큰 필요)
 GET http://localhost:8080/users/1
-Authorization: Bearer {{token}}
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzI4NjMxLCJpYXQiOjE3NTA3MjUwMzF9.giQbB5fR9cwhfYH2SjkCxJSBI4aazYG7ERwhDKrwGaM
 
 ### 비밀번호 변경 (토큰 필요)
 PUT http://localhost:8080/users
