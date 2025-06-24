@@ -39,9 +39,9 @@ Content-Type: application/json
 }
 
 ### ADMIN이 유저 권한 변경
-PATCH http://localhost:8080/admin/users/1
+PATCH http://localhost:8080/admin/users/2
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJ1c2VyUm9sZSI6IkFETUlOIiwiZXhwIjoxNzUwNzMwNDQ2LCJpYXQiOjE3NTA3MjY4NDZ9.aJnnL9mao9pwMrxpWfONlBf3SeNjbP6-jvmKOwNTuEY
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzQzNzMyLCJpYXQiOjE3NTA3NDAxMzJ9.HVJW65iSznnu51JmSqzIFNG1in5dNozP95xCRs1HkQE
 
 {
   "role": "ADMIN"

@@ -42,7 +42,7 @@ public class CommentService {
         return new CommentSaveResponse(
                 savedComment.getId(),
                 savedComment.getContents(),
-                new UserResponse(user.getId(), user.getEmail())
+                new UserResponse(user.getId(), user.getUserName(), user.getEmail())
         );
     }
 
@@ -53,7 +53,7 @@ public class CommentService {
                 .map(comment -> new CommentResponse(
                         comment.getId(),
                         comment.getContents(),
-                        new UserResponse(comment.getUser().getId(), comment.getUser().getEmail())
+                        new UserResponse(comment.getUser().getId(), comment.getUser().getUserName(), comment.getUser().getEmail())
                 ))
                 .toList();
     }

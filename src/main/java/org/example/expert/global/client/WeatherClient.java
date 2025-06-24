@@ -1,6 +1,6 @@
-package org.example.expert.client;
+package org.example.expert.global.client;
 
-import org.example.expert.client.dto.WeatherDto;
+import org.example.expert.global.client.dto.WeatherDto;
 import org.example.expert.domain.common.exception.ServerException;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpStatus;
