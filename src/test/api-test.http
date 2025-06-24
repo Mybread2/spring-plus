@@ -50,16 +50,19 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwidXNlcm5hbWUiOiJ0ZXN0I
 ### 할일 생성 (토큰 필요)
 POST http://localhost:8080/todos
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzM3NzU4LCJpYXQiOjE3NTA3MzQxNTh9.nC2TJXAR2Psdu6A1uY24edxgL6NVKniuhmveugn0uf4
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzUwODY1LCJpYXQiOjE3NTA3NDcyNjV9.MY-TTTx1dcwJ-Of3P9i1tuNBi_eGcJuFH2dDZXxAQIs
 
 {
   "title": "테스트 할일",
   "contents": "테스트 내용입니다"
 }
 
+
+
+
 ### 할일 목록 조회 (조건 없음)
 GET http://localhost:8080/todos?page=1&size=10
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzM2MTk5LCJpYXQiOjE3NTA3MzI1OTl9.wJdStoUeVztGlu9WEQLNFq3Gy2djibQ_TqV3fyJ1HJk
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzUyMjczLCJpYXQiOjE3NTA3NDg2NzN9.vsW2psdBia3MuABUbSKa3gVez9KEQCKMevk7Kw7CLEk
 
 ### 할일 목록 조회 (weather만)
 GET http://localhost:8080/todos?page=1&size=10&weather=Hail
@@ -75,7 +78,61 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0I
 
 ### 할일 단건 조회
 GET http://localhost:8080/todos/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzM3NzU4LCJpYXQiOjE3NTA3MzQxNTh9.nC2TJXAR2Psdu6A1uY24edxgL6NVKniuhmveugn0uf4
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzUwODY1LCJpYXQiOjE3NTA3NDcyNjV9.MY-TTTx1dcwJ-Of3P9i1tuNBi_eGcJuFH2dDZXxAQIs
+
+
+
+
+
+### 검색 - 제목으로 검색
+GET http://localhost:8080/todos/search?title=할일&page=1&size=10
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzUyMjczLCJpYXQiOjE3NTA3NDg2NzN9.vsW2psdBia3MuABUbSKa3gVez9KEQCKMevk7Kw7CLEk
+
+### 검색 - 제목 부분 검색
+GET http://localhost:8080/todos/search?title=테스트&page=1&size=10
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzUyMjczLCJpYXQiOjE3NTA3NDg2NzN9.vsW2psdBia3MuABUbSKa3gVez9KEQCKMevk7Kw7CLEk
+
+### 검색 - 생성일 범위 검색
+GET http://localhost:8080/todos/search?startDate=2024-01-01T00:00:00&endDate=2025-12-31T23:59:59&page=1&size=10
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzUyMjczLCJpYXQiOjE3NTA3NDg2NzN9.vsW2psdBia3MuABUbSKa3gVez9KEQCKMevk7Kw7CLEk
+
+### 검색 - 시작일만
+GET http://localhost:8080/todos/search?startDate=2025-01-01T00:00:00&page=1&size=10
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzUyMjczLCJpYXQiOjE3NTA3NDg2NzN9.vsW2psdBia3MuABUbSKa3gVez9KEQCKMevk7Kw7CLEk
+
+### 검색 - 종료일만
+GET http://localhost:8080/todos/search?endDate=2025-12-31T23:59:59&page=1&size=10
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzUyMjczLCJpYXQiOjE3NTA3NDg2NzN9.vsW2psdBia3MuABUbSKa3gVez9KEQCKMevk7Kw7CLEk
+
+### 검색 - 담당자 닉네임 검색
+GET http://localhost:8080/todos/search?managerUsername=test&page=1&size=10
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzUyMjczLCJpYXQiOjE3NTA3NDg2NzN9.vsW2psdBia3MuABUbSKa3gVez9KEQCKMevk7Kw7CLEk
+
+### 검색 - 담당자 닉네임 부분 검색
+GET http://localhost:8080/todos/search?managerUsername=te&page=1&size=10
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzUyMjczLCJpYXQiOjE3NTA3NDg2NzN9.vsW2psdBia3MuABUbSKa3gVez9KEQCKMevk7Kw7CLEk
+
+### 검색 - 복합 검색 (제목 + 날짜 + 담당자)
+GET http://localhost:8080/todos/search?title=할일&startDate=2024-01-01T00:00:00&endDate=2025-12-31T23:59:59&managerUsername=test&page=1&size=5
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzM2MTk5LCJpYXQiOjE7NTA3MzI1OTl9.wJdStoUeVztGlu9WEQLNFq3Gy2djibQ_TqV3fyJ1HJk
+
+### 검색 - 페이징 테스트 (2페이지)
+GET http://localhost:8080/todos/search?page=2&size=5
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzM2MTk5LCJpYXQiOjE3NTA3MzI1OTl9.wJdStoUeVztGlu9WEQLNFq3Gy2djibQ_TqV3fyJ1HJk
+
+### 검색 - 빈 검색어 테스트
+GET http://localhost:8080/todos/search?title=&managerUsername=&page=1&size=10
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzUyMjczLCJpYXQiOjE3NTA3NDg2NzN9.vsW2psdBia3MuABUbSKa3gVez9KEQCKMevk7Kw7CLEk
+
+### 검색 - 존재하지 않는 조건
+GET http://localhost:8080/todos/search?title=없는할일&managerUsername=없는유저&page=1&size=10
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzM2MTk5LCJpYXQiOjE3NTA3MzI1OTl9.wJdStoUeVztGlu9WEQLNFq3Gy2djibQ_TqV3fyJ1HJk
+
+### 검색 - 큰 페이지 사이즈 테스트
+GET http://localhost:8080/todos/search?page=1&size=50
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzM2MTk5LCJpYXQiOjE3NTA3MzI1OTl9.wJdStoUeVztGlu9WEQLNFq3Gy2djibQ_TqV3fyJ1HJk
+
+
 
 
 
