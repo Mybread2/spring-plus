@@ -50,7 +50,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJhZG1pb
 ### 할일 생성 (토큰 필요)
 POST http://localhost:8080/todos
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzMzMzE1LCJpYXQiOjE3NTA3Mjk3MTV9.Bvz02s1M5PV48anNoU76XB19Wz9uiFVFBiHkjcbw2Tk
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzM2MTk5LCJpYXQiOjE3NTA3MzI1OTl9.wJdStoUeVztGlu9WEQLNFq3Gy2djibQ_TqV3fyJ1HJk
 
 {
   "title": "테스트 할일",
@@ -59,7 +59,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0I
 
 ### 할일 목록 조회 (조건 없음)
 GET http://localhost:8080/todos?page=1&size=10
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzI4NjMxLCJpYXQiOjE3NTA3MjUwMzF9.giQbB5fR9cwhfYH2SjkCxJSBI4aazYG7ERwhDKrwGaM
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzM2MTk5LCJpYXQiOjE3NTA3MzI1OTl9.wJdStoUeVztGlu9WEQLNFq3Gy2djibQ_TqV3fyJ1HJk
 
 ### 할일 목록 조회 (weather만)
 GET http://localhost:8080/todos?page=1&size=10&weather=Hail
@@ -73,12 +73,24 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0I
 GET http://localhost:8080/todos?page=1&size=10&weather=Sunny&startDate=2024-01-01T00:00:00&endDate=2024-12-31T23:59:59
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzI4NjMxLCJpYXQiOjE3NTA3MjUwMzF9.giQbB5fR9cwhfYH2SjkCxJSBI4aazYG7ERwhDKrwGaM
 
-
 ### 할일 단건 조회
 GET http://localhost:8080/todos/2
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzI4NjMxLCJpYXQiOjE3NTA3MjUwMzF9.giQbB5fR9cwhfYH2SjkCxJSBI4aazYG7ERwhDKrwGaM
 
 
+
+### 댓글 작성 (todoId를 위에서 받은 할일 ID로 변경)
+POST http://localhost:8080/todos/1/comments
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzM2MTk5LCJpYXQiOjE3NTA3MzI1OTl9.wJdStoUeVztGlu9WEQLNFq3Gy2djibQ_TqV3fyJ1HJk
+
+{
+  "contents": "첫 번째 댓글입니다!"
+}
+
+### 댓글 목록 조회
+GET http://localhost:8080/todos/1/comments
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzM2MTk5LCJpYXQiOjE3NTA3MzI1OTl9.wJdStoUeVztGlu9WEQLNFq3Gy2djibQ_TqV3fyJ1HJk
 
 ### 유저 조회 (토큰 필요)
 GET http://localhost:8080/users/1
