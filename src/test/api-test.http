@@ -50,7 +50,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJhZG1pb
 ### 할일 생성 (토큰 필요)
 POST http://localhost:8080/todos
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzM2MTk5LCJpYXQiOjE3NTA3MzI1OTl9.wJdStoUeVztGlu9WEQLNFq3Gy2djibQ_TqV3fyJ1HJk
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzM3NzU4LCJpYXQiOjE3NTA3MzQxNTh9.nC2TJXAR2Psdu6A1uY24edxgL6NVKniuhmveugn0uf4
 
 {
   "title": "테스트 할일",
@@ -74,8 +74,8 @@ GET http://localhost:8080/todos?page=1&size=10&weather=Sunny&startDate=2024-01-0
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzI4NjMxLCJpYXQiOjE3NTA3MjUwMzF9.giQbB5fR9cwhfYH2SjkCxJSBI4aazYG7ERwhDKrwGaM
 
 ### 할일 단건 조회
-GET http://localhost:8080/todos/2
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzI4NjMxLCJpYXQiOjE3NTA3MjUwMzF9.giQbB5fR9cwhfYH2SjkCxJSBI4aazYG7ERwhDKrwGaM
+GET http://localhost:8080/todos/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzM3NzU4LCJpYXQiOjE3NTA3MzQxNTh9.nC2TJXAR2Psdu6A1uY24edxgL6NVKniuhmveugn0uf4
 
 
 
