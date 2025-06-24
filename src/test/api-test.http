@@ -3,8 +3,8 @@ POST http://localhost:8080/auth/signup
 Content-Type: application/json
 
 {
-  "username": "test",
-  "email": "test@example.com",
+  "username": "manager",
+  "email": "test123@example.com",
   "password": "Test123!",
   "userRole": "USER"
 }
@@ -50,14 +50,21 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwidXNlcm5hbWUiOiJ0ZXN0I
 ### 할일 생성 (토큰 필요)
 POST http://localhost:8080/todos
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzUwODY1LCJpYXQiOjE3NTA3NDcyNjV9.MY-TTTx1dcwJ-Of3P9i1tuNBi_eGcJuFH2dDZXxAQIs
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzU0ODQyLCJpYXQiOjE3NTA3NTEyNDJ9.tv7nRF6t8bNUVniLd3nJbb37nmQ8IsjjB2h6ZwTAx7c
 
 {
   "title": "테스트 할일",
   "contents": "테스트 내용입니다"
 }
 
+### 매니저 등록
+POST http://localhost:8080/todos/1/managers
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzU0ODQyLCJpYXQiOjE3NTA3NTEyNDJ9.tv7nRF6t8bNUVniLd3nJbb37nmQ8IsjjB2h6ZwTAx7c
 
+{
+  "managerUserId": 2
+}
 
 
 ### 할일 목록 조회 (조건 없음)

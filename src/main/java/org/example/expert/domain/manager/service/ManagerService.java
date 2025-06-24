@@ -67,7 +67,7 @@ public class ManagerService {
             User user = manager.getUser();
             dtoList.add(new ManagerResponse(
                     manager.getId(),
-                    new UserResponse(user.getId(), user.getUserName(), user.getEmail())
+                    new UserResponse(user.getId(), user.getUserName() ,user.getEmail())
             ));
         }
         return dtoList;
