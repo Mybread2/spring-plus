@@ -3,24 +3,13 @@ POST http://localhost:8080/auth/signup
 Content-Type: application/json
 
 {
-  "username": "manager",
-  "email": "test123@example.com",
+  "username": "test",
+  "email": "test@example.com",
   "password": "Test123!",
   "userRole": "USER"
 }
 
-### 회원가입 (ADMIN 계정)
-POST http://localhost:8080/auth/signup
-Content-Type: application/json
-
-{
-  "username": "admin",
-  "email": "admin@example.com",
-  "password": "Admin123!",
-  "userRole": "ADMIN"
-}
-
-### 로그인 (USER)
+### 로그인
 POST http://localhost:8080/auth/signin
 Content-Type: application/json
 
@@ -29,14 +18,9 @@ Content-Type: application/json
   "password": "Test123!"
 }
 
-### 로그인 (ADMIN)
-POST http://localhost:8080/auth/signin
-Content-Type: application/json
-
-{
-  "email": "admin@example.com",
-  "password": "Admin123!"
-}
+### 유저 조회
+GET http://localhost:8080/users/search?userName=userName_user_12345678&page=0&size=10
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzYxODcxLCJpYXQiOjE3NTA3NTgyNzF9.DG95Ry7nQjp5e6yyG4sGi91Dh_80bhcMdoYInEks2vg
 
 ### ADMIN이 유저 권한 변경
 PATCH http://localhost:8080/admin/users/2
@@ -50,10 +34,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwidXNlcm5hbWUiOiJ0ZXN0I
 ### 할일 생성 (토큰 필요)
 POST http://localhost:8080/todos
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzU0ODQyLCJpYXQiOjE3NTA3NTEyNDJ9.tv7nRF6t8bNUVniLd3nJbb37nmQ8IsjjB2h6ZwTAx7c
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzU1ODUzLCJpYXQiOjE3NTA3NTIyNTN9.Jk9aaPLDa3lOac7Bl9BW-VwQyIKPOLn5fV5polCUEXQ
 
 {
-  "title": "테스트 할일",
+  "title": "테스트 할일23",
   "contents": "테스트 내용입니다"
 }
 
@@ -92,8 +76,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0I
 
 
 ### 검색 - 제목으로 검색
-GET http://localhost:8080/todos/search?title=할일&page=1&size=10
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzUyMjczLCJpYXQiOjE3NTA3NDg2NzN9.vsW2psdBia3MuABUbSKa3gVez9KEQCKMevk7Kw7CLEk
+GET http://localhost:8080/todos/search?title=4&page=1&size=10
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzU1ODUzLCJpYXQiOjE3NTA3NTIyNTN9.Jk9aaPLDa3lOac7Bl9BW-VwQyIKPOLn5fV5polCUEXQ
 
 ### 검색 - 제목 부분 검색
 GET http://localhost:8080/todos/search?title=테스트&page=1&size=10

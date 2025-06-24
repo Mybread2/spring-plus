@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
+
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -34,9 +35,9 @@ class TodoControllerTest {
         // given
         long todoId = 1L;
         String title = "title";
-        AuthUser authUser = new AuthUser(1L, "test","email", UserRole.USER);
+        AuthUser authUser = new AuthUser(1L, "test", "email", UserRole.USER);
         User user = User.fromAuthUser(authUser);
-        UserResponse userResponse = new UserResponse(user.getId(), user.getUserName() ,user.getEmail());
+        UserResponse userResponse = new UserResponse(user.getId(), user.getUserName(), user.getEmail());
         TodoResponse response = new TodoResponse(
                 todoId,
                 title,
