@@ -34,10 +34,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwidXNlcm5hbWUiOiJ0ZXN0I
 ### 할일 생성 (토큰 필요)
 POST http://localhost:8080/todos
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzU1ODUzLCJpYXQiOjE3NTA3NTIyNTN9.Jk9aaPLDa3lOac7Bl9BW-VwQyIKPOLn5fV5polCUEXQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwOTMyMzkwLCJpYXQiOjE3NTA5Mjg3OTB9.xMePrXQHah0_j5tAs5qOMRca6sVHPaFKq4x0eVwRAeU
 
 {
-  "title": "테스트 할일23",
+  "title": "테스트 할일231234",
   "contents": "테스트 내용입니다"
 }
 
@@ -76,8 +76,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0I
 
 
 ### 검색 - 제목으로 검색
-GET http://localhost:8080/todos/search?title=4&page=1&size=10
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwNzU1ODUzLCJpYXQiOjE3NTA3NTIyNTN9.Jk9aaPLDa3lOac7Bl9BW-VwQyIKPOLn5fV5polCUEXQ
+GET http://localhost:8080/todos/search?title=2&page=1&size=10
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzUwOTMyMzkwLCJpYXQiOjE3NTA5Mjg3OTB9.xMePrXQHah0_j5tAs5qOMRca6sVHPaFKq4x0eVwRAeU
 
 ### 검색 - 제목 부분 검색
 GET http://localhost:8080/todos/search?title=테스트&page=1&size=10
