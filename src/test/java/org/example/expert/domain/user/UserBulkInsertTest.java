@@ -23,7 +23,7 @@ class UserBulkInsertTest {
     @Test
     @Rollback(false)
     void createMillionUsersWithBulkInsert() {
-        System.out.println("🚀 Bulk Insert로 100만건 유저 생성 시작!");
+        System.out.println("Bulk Insert로 100만건 유저 생성 시작!");
 
         long startTime = System.currentTimeMillis();
 
@@ -76,11 +76,11 @@ class UserBulkInsertTest {
         long endTime = System.currentTimeMillis();
         long totalTime = (endTime - startTime) / 1000;
 
-        System.out.println("🎉 Bulk Insert로 100만건 완료!");
-        System.out.println("⏰ 총 소요시간: " + totalTime + "초");
+        System.out.println("Bulk Insert로 100만건 완료!");
+        System.out.println("총 소요시간: " + totalTime + "초");
 
         // 실제 생성된 개수 확인
         Long count = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM users", Long.class);
-        System.out.println("📊 실제 생성된 유저 수: " + count + "명");
+        System.out.println("실제 생성된 유저 수: " + count + "명");
     }
 }
