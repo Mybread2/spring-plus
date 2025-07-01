@@ -52,7 +52,7 @@ CREATE TABLE todos (
   COMMENT='할일 테이블 - Phase 1 (기본 상태)';
 
 -- ==========================================
--- 3. Managers 테이블 (500만건 예상)
+-- 3. Managers 테이블 (240만건 예상)
 -- ==========================================
 CREATE TABLE managers (
                           id BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -74,7 +74,7 @@ CREATE TABLE managers (
   COMMENT='담당자 테이블 - Phase 1 (기본 상태)';
 
 -- ==========================================
--- 4. Comments 테이블 (800만건 예상)
+-- 4. Comments 테이블 (400만건 예상)
 -- ==========================================
 CREATE TABLE comments (
                           id BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -129,31 +129,3 @@ SELECT
 UNION ALL
 SELECT
     'manager_logs' as table_name, COUNT(*) as record_count FROM manager_logs;
-
--- ==========================================
--- 현재 인덱스 현황 확인용 프로시저
--- ==========================================
-DELIMITER //
-CREATE PROCEDURE ShowCurrentIndexes()
-BEGIN
-    SELECT
-        TABLE_NAME,
-        INDEX_NAME,
-        GROUP_CONCAT(COLUMN_NAME ORDER BY SEQ_IN_INDEX) as COLUMNS,
-        -- NON_UNIQUE을 GROUP BY에 추가하거나 집계함수 사용
-        CASE WHEN MAX(NON_UNIQUE) = 0 THEN 'UNIQUE' ELSE 'INDEX' END as INDEX_TYPE
-    FROM information_schema.STATISTICS
-    WHERE TABLE_SCHEMA = 'expert'
-    GROUP BY TABLE_NAME, INDEX_NAME
-    ORDER BY TABLE_NAME, INDEX_NAME;
-END //
-DELIMITER ;
-
--- ==========================================
--- 실행 결과 확인
--- ==========================================
-SHOW TABLES;
-SELECT * FROM v_data_summary;
-CALL ShowCurrentIndexes();
-
-SELECT 'Phase 1: 기본 테이블 생성 완료!' as status;

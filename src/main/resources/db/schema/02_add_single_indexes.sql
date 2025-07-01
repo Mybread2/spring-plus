@@ -38,7 +38,7 @@ ALTER TABLE todos ADD INDEX idx_weather (weather);
 SELECT 'todos.idx_weather 생성 완료' as status;
 
 -- created_at 기간 검색 및 정렬용
-ALTER TABLE todos ADD INDEX idx_created_at (created_at);
+ALTER TABLE todos ADD INDEX idx_created_at (created_at DESC);
 SELECT 'todos.idx_created_at 생성 완료' as status;
 
 -- modified_at 정렬용
@@ -72,48 +72,3 @@ SELECT 'comments.idx_user_id 생성 완료' as status;
 -- created_at 정렬용
 ALTER TABLE comments ADD INDEX idx_created_at (created_at);
 SELECT 'comments.idx_created_at 생성 완료' as status;
-
--- ==========================================
--- Manager Logs 테이블 인덱스
--- ==========================================
-
--- todo_id로 로그 조회용
-ALTER TABLE manager_logs ADD INDEX idx_todo_id (todo_id);
-SELECT 'manager_logs.idx_todo_id 생성 완료' as status;
-
--- action별 로그 조회용
-ALTER TABLE manager_logs ADD INDEX idx_action (action);
-SELECT 'manager_logs.idx_action 생성 완료' as status;
-
--- status별 로그 조회용
-ALTER TABLE manager_logs ADD INDEX idx_status (status);
-SELECT 'manager_logs.idx_status 생성 완료' as status;
-
--- created_at 시간순 조회용
-ALTER TABLE manager_logs ADD INDEX idx_created_at (created_at);
-SELECT 'manager_logs.idx_created_at 생성 완료' as status;
-
--- ==========================================
--- 인덱스 생성 완료 확인
--- ==========================================
-
--- 현재 인덱스 현황 출력
-CALL ShowCurrentIndexes();
-
--- 테이블 크기 및 인덱스 크기 확인
-SELECT
-    TABLE_NAME,
-    ROUND(DATA_LENGTH / 1024 / 1024, 2) as 'Data Size (MB)',
-    ROUND(INDEX_LENGTH / 1024 / 1024, 2) as 'Index Size (MB)',
-    ROUND((DATA_LENGTH + INDEX_LENGTH) / 1024 / 1024, 2) as 'Total Size (MB)'
-FROM information_schema.TABLES
-WHERE TABLE_SCHEMA = 'expert'
-ORDER BY (DATA_LENGTH + INDEX_LENGTH) DESC;
-
--- ⏰ 성능 측정 종료
-SELECT 'Phase 2: 단일 인덱스 추가 완료!' as status, NOW() as end_time;
-
--- ==========================================
--- 다음 단계 안내
--- ==========================================
-SELECT '다음 단계: 03_add_composite_indexes.sql 실행' as next_step;
