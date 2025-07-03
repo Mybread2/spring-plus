@@ -1,49 +1,64 @@
-package org.example.expert.domain.user.controller;
+package org.example.expert.domain.user.controller
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.example.expert.domain.common.annotation.Auth;
-import org.example.expert.domain.common.dto.AuthUser;
-import org.example.expert.domain.user.dto.request.UserChangePasswordRequest;
-import org.example.expert.domain.user.dto.response.UserResponse;
-import org.example.expert.domain.user.service.UserService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid
+import org.example.expert.domain.common.annotation.Auth
+import org.example.expert.domain.common.dto.AuthUser
+import org.example.expert.domain.user.dto.request.UserChangePasswordRequest
+import org.example.expert.domain.user.dto.request.UserRoleChangeRequest
+import org.example.expert.domain.user.dto.response.UserResponse
+import org.example.expert.domain.user.service.UserService
+import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
+import org.springframework.transaction.annotation.Transactional
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PatchMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.RestController
 
-import java.util.List;
-
-@Slf4j
 @RestController
-@RequiredArgsConstructor
-public class UserController {
-
-    private final UserService userService;
-
+class UserController(
+    private val userService: UserService,
+) {
     @GetMapping("/users/{userId}")
-    public ResponseEntity<UserResponse> getUser(@PathVariable long userId) {
-        return ResponseEntity.ok(userService.getUser(userId));
+    fun getUser(@PathVariable userId: Long): ResponseEntity<UserResponse> {
+        return ResponseEntity.ok(userService.getUser(userId))
     }
 
     @PutMapping("/users")
-    public void changePassword(@Auth AuthUser authUser, @RequestBody UserChangePasswordRequest userChangePasswordRequest) {
-        userService.changePassword(authUser.getId(), userChangePasswordRequest);
+    fun changePassword(
+        @Auth authUser: AuthUser,
+        @Valid @RequestBody userChangePasswordRequest: UserChangePasswordRequest
+    ) {
+        val user = userService.findUserByIdOrThrow(authUser.id)
+
+        user.changePassword(
+            oldPassword = userChangePasswordRequest.oldPassword,
+            newPassword = userChangePasswordRequest.newPassword
+        )
     }
 
     @GetMapping("/users/search")
-    public ResponseEntity<List<UserResponse>> searchUsersByNickname(
-            @RequestParam String nickname,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "20") int size
+    fun searchUsersByNickName(
+        @RequestParam nickname: String,
+        @RequestParam(defaultValue = "0") page: Int,
+        @RequestParam(defaultValue = "20") size: Int
+    ): ResponseEntity<List<UserResponse>> {
+        val users = userService.searchUsersByNickname(nickname, page, size)
+        return ResponseEntity.ok(users)
+    }
+
+    @PatchMapping("/admin/users/{userId}")
+    @PreAuthorize("hasRole('ADMIN')")
+    @Transactional
+    fun changeUserRole(
+        @PathVariable userId: Long,
+        @Valid @RequestBody request: UserRoleChangeRequest
     ) {
-        long startTime = System.currentTimeMillis();
+        val user = userService.findUserByIdOrThrow(userId)
 
-        List<UserResponse> users = userService.searchUsersByNickname(nickname, page, size);
-
-        long endTime = System.currentTimeMillis();
-        long duration = endTime - startTime;
-
-        System.out.println("🔍 검색 소요시간: " + duration + "ms");
-
-        return ResponseEntity.ok(users);
+        user.changeRole(request.role)
     }
 }

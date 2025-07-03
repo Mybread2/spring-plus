@@ -1,49 +1,52 @@
-package org.example.expert.domain.user.entity;
+package org.example.expert.domain.user.entity
 
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import org.example.expert.domain.common.dto.AuthUser;
-import org.example.expert.domain.common.entity.Timestamped;
-import org.example.expert.domain.user.enums.UserRole;
+import jakarta.persistence.*
+import org.example.expert.domain.common.entity.Timestamped
+import org.example.expert.domain.user.enums.UserRole
 
-@Getter
 @Entity
-@NoArgsConstructor
 @Table(name = "users")
-public class User extends Timestamped {
+open class User (
+
+    @Column(unique = true)
+    var email : String,
+
+    var userName : String,
+
+    var password : String,
+
+    @Enumerated(EnumType.STRING)
+    var userRole : UserRole,
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(unique = true)
-    private String email;
-    private String userName;
-    private String password;
-    @Enumerated(EnumType.STRING)
-    private UserRole userRole;
+    val id : Long? = null
+) : Timestamped() {
 
-    public User(String userName, String email, String password, UserRole userRole) {
-        this.userName = userName;
-        this.email = email;
-        this.password = password;
-        this.userRole = userRole;
+    protected constructor() : this("", "", "", UserRole.USER, null)
+
+    fun changePassword(
+        oldPassword: String,
+        newPassword: String,
+    ) {
+        checkPassword(this.password, oldPassword, newPassword)
+        this.password = newPassword
     }
 
-    private User(Long id, String email, UserRole userRole) {
-        this.id = id;
-        this.email = email;
-        this.userRole = userRole;
+    fun changeRole(newRole: String) {
+        this.userRole = UserRole.of(newRole)
     }
 
-    public static User fromAuthUser(AuthUser authUser) {
-        return new User(authUser.getId(), authUser.getEmail(), authUser.getUserRole());
+    override fun toString(): String {
+        return "User(id=$id, email='$email', userName='$userName', userRole=$userRole)"
     }
 
-    public void changePassword(String password) {
-        this.password = password;
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is User) return false
+        return id != null && id == other.id
     }
 
-    public void updateRole(UserRole userRole) {
-        this.userRole = userRole;
+    override fun hashCode(): Int {
+        return id?.hashCode() ?: 0
     }
 }

@@ -1,16 +1,19 @@
-package org.example.expert.domain.user.enums;
+package org.example.expert.domain.user.enums
 
-import org.example.expert.domain.common.exception.InvalidRequestException;
+import org.example.expert.domain.common.exception.InvalidRequestException
 
-import java.util.Arrays;
-
-public enum UserRole {
+enum class UserRole {
     ADMIN, USER;
 
-    public static UserRole of(String role) {
-        return Arrays.stream(UserRole.values())
-                .filter(r -> r.name().equalsIgnoreCase(role))
-                .findFirst()
-                .orElseThrow(() -> new InvalidRequestException("유효하지 않은 UerRole"));
+    companion object {
+        fun of(role: String?): UserRole {
+            if (role.isNullOrBlank()) {
+                throw IllegalArgumentException("User role cannot be null or blank")
+            }
+
+            return enumValues<UserRole>()
+                .firstOrNull { it.name.equals(role.trim(), ignoreCase = true)}
+                ?: throw InvalidRequestException("유효하지 않은 UserRole: $role. 사용 가능한 값: ${enumValues<UserRole>().joinToString()}")
+        }
     }
 }

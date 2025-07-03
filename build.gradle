@@ -2,6 +2,10 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.3.3'
     id 'io.spring.dependency-management' version '1.1.6'
+
+    id 'org.jetbrains.kotlin.jvm' version '1.9.10'
+    id 'org.jetbrains.kotlin.plugin.spring' version '1.9.10'
+    id 'org.jetbrains.kotlin.plugin.jpa' version '1.9.10'
 }
 
 group = 'org.example'
@@ -11,6 +15,10 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
     }
+}
+
+kotlin {
+    jvmToolchain(17)
 }
 
 configurations {
@@ -28,6 +36,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    implementation 'org.jetbrains.kotlin:kotlin-reflect'           // 리플렉션 지원
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'       // 코틀린 표준 라이브러리
+    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'  // JSON 직렬화
+
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.mysql:mysql-connector-j'
     annotationProcessor 'org.projectlombok:lombok'
@@ -53,4 +66,12 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+// 코틀린 컴파일 태스크 설정 (Spring Boot + 코틀린 프로젝트 필수)
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile) {
+    kotlinOptions {
+        freeCompilerArgs += '-Xjsr305=strict'  // Spring의 null safety 어노테이션 엄격 처리
+        jvmTarget = '17'                       // Java 17 타겟팅 (프로젝트 Java 버전과 일치)
+    }
 }

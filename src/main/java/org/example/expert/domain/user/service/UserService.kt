@@ -1,67 +1,22 @@
-package org.example.expert.domain.user.service;
+package org.example.expert.domain.user.service
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.example.expert.global.security.PasswordEncoder;
-import org.example.expert.domain.common.exception.InvalidRequestException;
-import org.example.expert.domain.user.dto.request.UserChangePasswordRequest;
-import org.example.expert.domain.user.dto.response.UserResponse;
-import org.example.expert.domain.user.entity.User;
-import org.example.expert.domain.user.repository.UserRepository;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.example.expert.domain.user.dto.response.UserResponse
+import org.example.expert.domain.user.entity.User
 
-import java.util.List;
+interface UserService {
 
-@Slf4j
-@Service
-@RequiredArgsConstructor
-@Transactional(readOnly = true)
-public class UserService {
+    /**
+     * 사용자 엔티티 조회 (다른 도메인에서 연관관계 설정용)
+     */
+    fun findUserByIdOrThrow(userId: Long): User
 
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    /**
+     * 사용자 정보 조회 (DTO 반환)
+     */
+    fun getUser(userId: Long): UserResponse
 
-    public UserResponse getUser(long userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new InvalidRequestException("User not found"));
-        return new UserResponse(user.getId(), user.getUserName(), user.getEmail());
-    }
-
-    @Transactional
-    public void changePassword(long userId, UserChangePasswordRequest userChangePasswordRequest) {
-        validateNewPassword(userChangePasswordRequest);
-
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new InvalidRequestException("User not found"));
-
-        if (passwordEncoder.matches(userChangePasswordRequest.getNewPassword(), user.getPassword())) {
-            throw new InvalidRequestException("새 비밀번호는 기존 비밀번호와 같을 수 없습니다.");
-        }
-
-        if (!passwordEncoder.matches(userChangePasswordRequest.getOldPassword(), user.getPassword())) {
-            throw new InvalidRequestException("잘못된 비밀번호입니다.");
-        }
-
-        user.changePassword(passwordEncoder.encode(userChangePasswordRequest.getNewPassword()));
-    }
-
-    public List<UserResponse> searchUsersByNickname(String nickname, int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        Page<User> users = userRepository.findByUserNameExact(nickname, pageable);
-
-        return users.stream()
-                .map(user -> new UserResponse(user.getId(), user.getUserName(), user.getEmail()))
-                .toList();
-    }
-
-    private static void validateNewPassword(UserChangePasswordRequest userChangePasswordRequest) {
-        if (userChangePasswordRequest.getNewPassword().length() < 8 ||
-                !userChangePasswordRequest.getNewPassword().matches(".*\\d.*") ||
-                !userChangePasswordRequest.getNewPassword().matches(".*[A-Z].*")) {
-            throw new InvalidRequestException("새 비밀번호는 8자 이상이어야 하고, 숫자와 대문자를 포함해야 합니다.");
-        }
-    }
+    /**
+     * 닉네임으로 사용자 검색
+     */
+    fun searchUsersByNickname(nickname: String, page: Int, size: Int): List<UserResponse>
 }
